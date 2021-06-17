@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bytes"
+	"encoding/base64"
 	"io"
 	"log"
 	"os"
@@ -59,6 +60,10 @@ func PathExists(path string) bool {
 
 func GenerateSecretManifest(t_name string, t_namespace string, t_data map[string]interface{}, t_labels map[string]interface{}, t_type string) (io.Reader, error) {
 	secretManifestYAML := new(bytes.Buffer)
+
+	for k, v := range t_data {
+		t_data[k] = base64.StdEncoding.EncodeToString([]byte(v.(string)))
+	}
 
 	secretManifest := SecretManifest{
 		Name:      t_name,

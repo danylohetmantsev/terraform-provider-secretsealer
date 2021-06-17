@@ -16,14 +16,12 @@ data secretsealer_secret this {
     reflector-class = "tls"
   }
 
-  certificate_path = "./cert.crt"
+  certificate = file("./cert.crt")
 
   data = {
-    username = base64encode("User"),
-    password = base64encode("SECRET_SO_SECRET")
+    username = "sagasgas",
+    password = "sfasgasg"
   }
-
-  type = "Opaque"
 }
 
 resource local_file this {

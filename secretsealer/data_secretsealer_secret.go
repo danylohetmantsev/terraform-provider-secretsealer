@@ -6,6 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
+	"strings"
 
 	secretsealer "terraform-provider-secretsealer/utils/kubeseal"
 
@@ -48,7 +49,7 @@ func dataTemplate() *schema.Resource {
 				Default:     "Opaque",
 				Description: "Time in seconds to wait for any individual kubernetes operation.",
 			},
-			"certificate_path": {
+			"certificate": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "Time in seconds to wait for any individual kubernetes operation.",
@@ -78,14 +79,15 @@ func dataTemplateRead(ctx context.Context, d *schema.ResourceData, m interface{}
 
 	var diags diag.Diagnostics
 
-	certificate_rsa, err := ioutil.ReadFile(d.Get("certificate_path").(string))
+	plaintext_certificate := strings.NewReader(d.Get("certificate").(string))
+	bytes_certificate, err := ioutil.ReadAll(plaintext_certificate)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	var cert *x509.Certificate
 
-	block, _ := pem.Decode([]byte(certificate_rsa))
+	block, _ := pem.Decode([]byte(bytes_certificate))
 	cert, _ = x509.ParseCertificate(block.Bytes)
 	rsaPublicKey := cert.PublicKey.(*rsa.PublicKey)
 
