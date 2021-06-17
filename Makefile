@@ -1,4 +1,4 @@
-BINARY_NAME=terraform-provider-sealedsecrets
+BINARY_NAME=terraform-provider-secretsealer
 BUILD_PATH=build
 VERSION?=0.1.0
 

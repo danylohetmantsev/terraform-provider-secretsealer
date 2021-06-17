@@ -1,7 +1,7 @@
-terraform-provider-sealedsecrets
+terraform-provider-secretsealer
 ================================
 
-A very barebones provider that exposes basic `sealedsecrets` functionality as a terraform data source.
+A very barebones provider that exposes basic `secretsealer` functionality as a terraform data source.
 
 
 ### Usage
