@@ -21,13 +21,13 @@ provider "secretsealer" {
 
 data "secretsealer_secret" "my_secret" {
   name = "my-secret"
-  namespace = "my-namespace
+  namespace = "my-namespace"
   type = "Opaque"
 
   data = {
     key = "value"
   }
-  certificate_path = "./cert.crt"
+  certificate = file("./cert.crt")
 }
 ```
 
