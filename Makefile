@@ -1,6 +1,6 @@
 BINARY_NAME=terraform-provider-sealedsecrets
 BUILD_PATH=build
-VERSION?=0.0.2
+VERSION?=0.1.0
 
 GO_CMD=go
 GO_TEST=gotestsum
